@@ -12,7 +12,7 @@ const ProductPage = () => {
   const [categories, setCategories] = useState([]);
   const [colors, setColors] = useState([]);
   const [sizes, setSizes] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState("");
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
 
@@ -24,21 +24,26 @@ const ProductPage = () => {
       let filteredProducts = originalProducts;
 
       if (selectedCategories.length > 0) {
+        
         filteredProducts = filteredProducts.filter(product =>
-          selectedCategories.includes(product.category)
+          selectedCategories === product.category
         );
+        console.log("selected category---",selectedCategories)
+        console.log("category---",filteredProducts)
       }
 
       if (selectedColors.length > 0) {
         filteredProducts = filteredProducts.filter(product =>
           selectedColors.includes(product.color)
         );
+        console.log("colors---",filteredProducts)
       }
 
       if (selectedSizes.length > 0) {
         filteredProducts = filteredProducts.filter(product =>
           selectedSizes.includes(product.size)
         );
+        console.log("sizes---",filteredProducts)
       }
 
       setProducts(filteredProducts);
@@ -73,11 +78,7 @@ const ProductPage = () => {
 
   const handleCategoryChange = (event) => {
     const selectedCategory = event.target.value;
-    setSelectedCategories((prevSelected) =>
-      prevSelected.includes(selectedCategory)
-        ? prevSelected.filter((cat) => cat !== selectedCategory)
-        : [...prevSelected, selectedCategory]
-    );
+    setSelectedCategories(selectedCategory)
   };
 
   const handleColorChange = (event) => {
