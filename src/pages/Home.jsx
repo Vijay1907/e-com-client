@@ -45,7 +45,7 @@ const Home = () => {
         <h2 className="text-3xl mb-8">Featured Products</h2>
         <div className="flex flex-wrap justify-around mx-5">
         {products?.map((item)=>(
-            <Product key={item?._id} name={item?.name } imgUrl={item?.image} price={item?.price}  />
+            <Product key={item?._id} name={item?.name } imgUrl={item?.image} price={item?.price} _id={item?._id} />
          ))}
      
          

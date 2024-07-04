@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getSearchProduct } from '../services/apiServices';
+import { addToCart, getSearchProduct } from '../services/apiServices';
+import { userId } from '../constants/constant';
+import { toast } from 'react-toastify';
 
 const ProductPage = () => {
   const location = useLocation();
@@ -99,6 +101,21 @@ const ProductPage = () => {
     );
   };
 
+  const addItemToCart = async(productId)=>{
+    try{
+     const res = await addToCart({userId,productId,quantity:1})
+     toast.success("Item added to cart successfully..", {
+       position: "bottom-center"
+     });
+   
+   }catch(err){
+    console.log("Some error in fetching data")
+    toast.error("Some error in adding data to cart", {
+     position:"bottom-center"
+     });
+   }
+ }
+
   return (
 
 <div className='flex justify-between'>
@@ -152,7 +169,7 @@ const ProductPage = () => {
         <h3 className="text-3xl font-bold mb-4">{item?.name}</h3>
         <p className="text-xl text-gray-600 mb-4">${item?.price}</p>
         <p className="text-gray-700 mb-4">{item?.description}</p>
-        <button className="bg-red-500 hover:bg-red-600 text-sm text-white py-2 px-4 rounded-lg">
+        <button className="bg-red-500 hover:bg-red-600 text-sm text-white py-2 px-4 rounded-lg" onClick={()=>{ addItemToCart(item?._id)}}>
           Add to Cart
         </button>
       </div>

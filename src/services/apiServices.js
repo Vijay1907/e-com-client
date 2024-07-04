@@ -35,3 +35,48 @@ export const getSearchProduct = async (query) => {
     throw error;
   }
 };
+
+
+export const addToCart = async (product) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/cart/add`, product);
+    return response;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
+  }
+};
+
+export const removeFromCart = async (userId,productId) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/cart/remove`, {userId,productId});
+    return response;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
+  }
+};
+
+export const checkout = async (obj) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/cart/checkout`, obj);
+    return response;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
+  }
+};
+
+export const getCartItems = async (userId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/cart/getCartItems/${userId}`);
+    return response;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
+  }
+};
+
+
+
+
